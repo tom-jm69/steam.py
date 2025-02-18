@@ -1365,3 +1365,36 @@ class ClientRefuseSecureMode(betterproto.Message):
 class ClientRequestValidation(betterproto.Message):
     full_report: bool = betterproto.bool_field(1)
     module: str = betterproto.string_field(2)
+
+class PremierSeasonSummary(GCProtobufMessage, msg=EMsg.PremierSeasonSummary): # request
+    account_id: int = betterproto.uint32_field(1)
+    season_id: int = betterproto.uint32_field(2)
+
+class PremierSeasonSummarySummary(GCProtobufMessage, msg=EMsg.PremierSeasonSummary): # response
+    account_id: int = betterproto.uint32_field(1)
+    season_id: int = betterproto.uint32_field(2)
+    data_per_week: "list[PremierSeasonSummaryDataPerWeek]" = (
+        betterproto.message_field(3)
+    )
+
+@dataclass(eq=False, repr=False)
+class PremierSeasonSummaryDataPerWeek(betterproto.Message):
+    week_id: int = betterproto.uint64_field(1)
+    rank_id: int = betterproto.uint32_field(2)
+    matches_played: int = betterproto.uint32_field(3)
+
+@dataclass(eq=False, repr=False)
+class PremierSeasonSummaryDataPerMap(betterproto.Message):
+    map_id: int = betterproto.uint32_field(1)
+    wins: int = betterproto.uint32_field(2)
+    ties: int = betterproto.uint32_field(3)
+    losses: int = betterproto.uint32_field(4)
+    rounds: int = betterproto.uint32_field(5)
+    kills: int = betterproto.uint32_field(6)
+    headshots: int = betterproto.uint32_field(7)
+    assists: int = betterproto.uint32_field(8)
+    deaths: int = betterproto.uint32_field(9)
+    mvps: int = betterproto.uint32_field(10)
+    rounds_3k: int = betterproto.uint32_field(11)
+    rounds_4k: int = betterproto.uint32_field(12)
+    rounds_5k: int = betterproto.uint32_field(13)

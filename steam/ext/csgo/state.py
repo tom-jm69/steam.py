@@ -225,6 +225,14 @@ class GCState(GCState_[Backpack]):
             cstrike.PlayersProfile,
             check=lambda msg: msg.account_profiles[0].account_id == user_id,
         )
+    async def fetch_user_premier(self, user_id: int) -> cstrike.PremierSeasonSummarySummary:
+        await self.ws.send_gc_message(
+            cstrike.PremierSeasonSummary(account_id=user_id, season_id=1)
+        )
+        return await self.ws.gc_wait_for(
+            cstrike.PremierSeasonSummarySummary,
+            check=lambda msg: msg.account_id == user_id,
+        )
 
     @parser
     async def handle_so_create(self, msg: sdk.SOCreate):

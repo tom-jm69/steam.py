@@ -378,3 +378,4 @@ class EMsg(IntEnum):
     ClientRequestJoinFriendData            = 9163
     ClientRequestJoinServerData            = 9164
     ClientRequestNewMission                = 9165
+    PremierSeasonSummary                   = 9224
